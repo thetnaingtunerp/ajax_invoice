@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="card border-info mb-3">
+  <div class="card-body">
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createItm">
+  + Create New Item
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createItm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="createCus">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter Customer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="newCustomer" class="form-control" id="cusName">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success invModal">Create Invoice</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<table class="table table-striped" id="itemlisttable">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">item_name</th>
+      <th scope="col">price</th>
+      <th scope="col">stock</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for i in itm %}
+    <tr>
+      <th scope="row"><img src="{{i.photo.url}}" width="60px"></th>
+      <td>{{i.item_name}}</td>
+
+      <td>{{i.price}}</td>
+      <td>{{i.stock}}</td>
+      <td>
+      	<a href="#">update</a>
+      </td>
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock content %}

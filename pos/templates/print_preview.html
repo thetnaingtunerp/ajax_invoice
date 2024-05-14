@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+     * {
+    font-size: 12px;
+    font-family: 'Times New Roman';
+}
+
+td,
+th,
+tr,
+table {
+    border: 1px solid black;
+
+    border-collapse: collapse;
+    height: 50px;
+}
+
+
+
+
+
+    .cusName{
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .dte{
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 500px;
+    }
+
+.srno{
+  width: 50px;
+  max-width: 50px;
+  text-align: center;
+  font-size: 22px;
+}
+
+
+.itmname, .titm{
+   width: 800px;
+    max-width: 800px;
+    text-align: center;
+    align-content: center;
+    font-size : 22px;
+    font-weight: bold;
+}
+
+.hqty, .tqty{
+  width: 80px;
+    max-width: 80px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+.hrate, .trate{
+  width: 150px;
+    max-width: 150px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+.amt, .tamt{
+   width: 200px;
+    max-width: 200px;
+    text-align: center;
+    align-content: center;
+    font-size : 18px;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+
+
+
+
+
+{{data.id}}
+
+<img src="{{p.photo.url}}" width="100%">
+
+<div>
+  <span class="cusName">ဝယ်သူအမည် : ----</span> <span class="dte">ရက်စွဲ : </span>
+</div>
+
+
+
+<div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" class="srno">စဉ် </th>
+      <th scope="col" class="itmname">အမျိုးအမည် </th>
+      <th scope="col" class="hqty">ဦးရေ </th>
+      <th scope="col" class="hrate">နှုန်း  </th>
+      <th scope="col" class="amt">ကျပ် </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in invitm %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td class="titm">{{i.item}}</td>
+      <td class="tqty">{{i.qty}}</td>
+      <td class="trate">{{i.rate}}</td>
+      <td class="tamt">
+        {{i.amount}}
+      </td>
+      
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Total</td>
+      <td class="text-right"><strong>{{data.total}}</strong></td>
+      
+    </tr>
+
+    <tr>
+      <td></td>
+      
+      <td colspan="3">
+        
+      </td>
+      <td></td>
+      
+
+    </tr>
+    
+  </tbody>
+</table>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
+
