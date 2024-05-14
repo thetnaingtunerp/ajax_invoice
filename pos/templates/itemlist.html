@@ -56,7 +56,8 @@
       <td>{{i.price}}</td>
       <td>{{i.stock}}</td>
       <td>
-      	<a href="#">update</a>
+      	<a href="{% url 'myapp:update_view' i.id %]">update</a>
+        <a href="{% url 'myapp:update_view' i.id %}" class="btn btn-sm btn-outline-info">Print</a>
       </td>
     </tr>
     {% endfor %}

@@ -1,5 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
+from django.shortcuts import (get_object_or_404,
+                            render,
+                            HttpResponseRedirect)
+
+
 from .models import *
 from .forms import *
 # Create your views here.
@@ -23,6 +28,43 @@ def itemcreate(request):
     else:
         form = ItemForm()
     return render(request, 'itemlist.html', {'form': form})
+
+
+
+
+# after updating it will redirect to detail_View
+def detail_view(request, id):
+    # dictionary for initial data with 
+    # field names as keys
+    context ={}
+
+    # add the dictionary during initialization
+    context["data"] = item.objects.get(id = id)
+        
+    return render(request, "detail_view.html", context)
+
+# update view for details
+def update_view(request, id):
+    # dictionary for initial data with 
+    # field names as keys
+    context ={}
+
+    # fetch the object related to passed id
+    obj = get_object_or_404(item, id = id)
+
+    # pass the object as instance in form
+    form = ItemForm(request.POST, request.FILES or None, instance = obj)
+
+    # save the data from the form and
+    # redirect to detail_view
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/"+id)
+
+    # add form dictionary to context
+    context["form"] = form
+
+    return render(request, "update_view.html", context)
 
 
 
