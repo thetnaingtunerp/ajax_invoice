@@ -13,6 +13,7 @@ urlpatterns = [
 
 	# setup menu
 	path('itemlist/', views.itemlist, name='itemlist'),
+	path('itemcreate/', views.itemcreate, name='itemcreate'),
 
 	#reports
 ]

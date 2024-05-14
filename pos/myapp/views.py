@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from .models import *
+from .forms import *
 # Create your views here.
 def testfile(request):
 	return render(request, 'test.html')
@@ -9,10 +10,19 @@ def testfile(request):
 # Setup Menu 
 def itemlist(request):
     itm = item.objects.all()
-    context = {'itm':itm}
+    form = ItemForm()
+    context = {'itm':itm, 'form':form}
     return render(request, 'itemlist.html', context)
 
-
+def itemcreate(request):
+    if request.method == 'POST':
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:itemlist')
+    else:
+        form = ItemForm()
+    return render(request, 'itemlist.html', {'form': form})
 
 
 
