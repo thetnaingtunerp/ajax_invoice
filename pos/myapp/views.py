@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import (get_object_or_404,
                             render,
@@ -28,6 +28,18 @@ def itemcreate(request):
     else:
         form = ItemForm()
     return render(request, 'itemlist.html', {'form': form})
+
+
+def item_update(request):
+    if request.method == 'POST':
+        itmname = request.POST.get('itmname')
+        slug = request.POST.get('slug')
+        price = request.POST.get('price')
+        iid = request.POST.get('iid')
+        i = item.objects.filter(id=iid).update(item_name=itmname,slug=slug, price=price)
+        return redirect('myapp:itemlist')
+    else:
+        return redirect('myapp:itemlist')
 
 
 
