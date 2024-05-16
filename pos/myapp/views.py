@@ -138,3 +138,7 @@ def print_preview(request,id):
 
 
 
+#Sale Item Report 
+
+def sale_item_report(request):
+    return render(request, 'sale_item_report.html')

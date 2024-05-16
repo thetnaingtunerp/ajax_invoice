@@ -18,4 +18,5 @@ urlpatterns = [
 	# path('/update_view/<int:id>/', views.update_view, name='update_view'),
 
 	#reports
+	path('sale_item_report/', views.sale_item_report, name='sale_item_report'),
 ]
