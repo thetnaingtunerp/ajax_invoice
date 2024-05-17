@@ -35,9 +35,9 @@
       <th scope="col"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="invTablebody">
   	{% for i in invitm %}
-    <tr>
+    <tr class="invtr">
       <th scope="row">{{forloop.counter}}</th>
       <td>{{i.item}}</td>
       <td>{{i.qty}}</td>
@@ -46,7 +46,11 @@
       	{{i.amount}}
       </td>
       <td>
-        <button class="btn btn-sm btn-outline-danger rmvItem">X</button>
+        <span class="itmid" hidden>{{i.id}}</span>
+        <button class="btn btn-sm btn-danger rmvItem">
+        
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
       </td>
     </tr>
     {% endfor %}
@@ -98,6 +102,7 @@
   <div class="card-body">
     <h5 class="card-title itmname">{{i.item_name}}</h5>
     <span class="text-primary iprice">{{i.price}}</span>
+    <span class="itmid" hidden>{{i.id}}</span>
 
     <p class="card-text">
     	

@@ -106,21 +106,28 @@ def create_invoice(request):
     inv_obj = invoice.objects.create(customer=cu, total=0)
     return JsonResponse({'status':'success'})
 
-# {itm:itm, ipri:ipri, iqty:iqty},
+
 def itm_add_invitm(request):
     itm = request.GET.get('itm')
     ipri = request.GET.get('ipri')
     iqty = request.GET.get('iqty')
     invid = request.GET.get('invid')
+    itmid = request.GET.get('itmid')
+    
+    itmi = int(itmid) #item id
     r = int(ipri)
     qty = int(iqty)
     am = int(r * qty)
-    # print(am)
+    itm_obj = item.objects.get(id=itmi)
     inv_obj = invoice.objects.get(id = int(invid))
     i = invitem(inv=inv_obj, item=itm, qty=qty, rate=r, amount=am)
     i.save()
     inv_obj.total += am
     inv_obj.save()
+
+    itm_obj.stock -= qty
+    itm_obj.save()
+
     return JsonResponse({'status':'success'})
 
 
@@ -135,10 +142,31 @@ def print_preview(request,id):
     return render(request, "print_preview.html", context)
     
 
+def delete_item_invoice(request):
+    itmid = request.GET.get('itmid')
+    invid = request.GET.get('invid')
+    tid = int(itmid)
+    iid = int(invid)
+
+    inv_obj = invitem.objects.get(id=tid)
+    amt = inv_obj.amount
+
+    #update invoice total 
+    inv = invoice.objects.get(id=iid)
+    tt = inv.total
+    iov_total = tt-amt
+    inv.total = iov_total
+    inv.save()
+
+    inv_obj.delete()
+    return JsonResponse({'status':'success'})
+
 
 
 
 #Sale Item Report 
 
 def sale_item_report(request):
-    return render(request, 'sale_item_report.html')
+    ivt = invitem.objects.all()
+    context = {'ivt':ivt}
+    return render(request, 'sale_item_report.html',context)

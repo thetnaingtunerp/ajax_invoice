@@ -10,6 +10,7 @@ urlpatterns = [
 	path('create_invoice/', views.create_invoice, name='create_invoice'),
 	path('itm_add_invitm/', views.itm_add_invitm, name='itm_add_invitm'),
 	path('print_preview/<int:id>/', views.print_preview, name='print_preview'),
+	path('delete_item_invoice/', views.delete_item_invoice, name='delete_item_invoice'),
 
 	# setup menu
 	path('itemlist/', views.itemlist, name='itemlist'),

@@ -13,6 +13,8 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.5.2/css/dataTables.dateTime.min.css">
 
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.7.0/css/autoFill.bootstrap4.min.css"> -->
 
     <title></title>
@@ -29,18 +31,16 @@
         <a class="nav-link text-white" href="#">ပင်မစာမျက်နှာ <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}">အရောင်းဘောက်ချာများ</a>
+        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}">အရောင်းစာမျက်နှာ</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
           Setup
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'myapp:itemlist' %}">Create Item</a>
-          <a class="dropdown-item" href="#">Sale Report</a>
+          <a class="dropdown-item" href="{% url 'myapp:sale_item_report' %}">Sale Item Report</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
@@ -121,13 +121,15 @@ $("#modalItmCard").on('click', '.addItem', function() {
   var itm = currentRow.find(".itmname").html();
   var ipri = currentRow.find(".iprice").html();
   var iqty = currentRow.find("input").val(); 
+  var itmid = currentRow.find(".itmid").html();
   // console.log(iqty);
   var invid = $("#invid").html();
+
   // alert(invid);
   $.ajax({
     url: "/itm_add_invitm/",
     method: "GET",
-    data:{itm:itm, ipri:ipri, iqty:iqty, invid:invid},
+    data:{itm:itm, ipri:ipri, iqty:iqty, invid:invid, itmid:itmid},
     success: function(data){
         // console.log(data.status);
 
@@ -148,9 +150,34 @@ $("#modalItmCard").on('click', '.addItem', function() {
 });//end add item to invoice 
 
 
-// $(document).ready( function () {
-//     $('#myTable').DataTable();
-// } );
+//start delete item from invoice
+$("#invTablebody").on('click', '.rmvItem', function() {
+    var currenttr = $(this).closest(".invtr");
+    var itmid = currenttr.find(".itmid").html();
+
+    var invid = $("#invid").html();
+    
+    $.ajax({
+    url: "/delete_item_invoice/",
+    method: "GET",
+    data:{itmid:itmid, invid:invid},
+    success: function(data){
+        // console.log(data.status);
+
+        // alert('Item Add Successfully');
+        window.setTimeout(function(){ } ,2000);
+                        location.reload();
+
+        // window.location.href = '/admin/';
+        // window.open('https://www.codexworld.com', '_blank');
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    },
+                    
+  });//end ajax
+});//end delete item from invoice
+
 
 
 });
@@ -162,11 +189,63 @@ $("#modalItmCard").on('click', '.addItem', function() {
 
 <script type="text/javascript">
   $(document).ready( function () {
-    $('#itemlisttable').DataTable();
+    $('#itemlisttable').DataTable( {
+    paging: false,
+    scrollCollapse: true,
+    scrollY: '600px'
+});
 } );
 
 
 </script>
+
+
+
+
+
+
+<!-- Sale Item Report -->
+<script>
+
+	let minDate, maxDate;
+
+// Custom filtering function which will search data in column four between two values
+DataTable.ext.search.push(function (settings, data, dataIndex) {
+    let min = minDate.val();
+    let max = maxDate.val();
+    let date = new Date(data[5]);
+
+    if (
+        (min === null && max === null) ||
+        (min === null && date <= max) ||
+        (min <= date && max === null) ||
+        (min <= date && date <= max)
+    ) {
+        return true;
+    }
+    return false;
+});
+
+// Create date inputs
+minDate = new DateTime('#min', {
+    format: 'MMMM Do YYYY'
+});
+maxDate = new DateTime('#max', {
+    format: 'MMMM Do YYYY'
+});
+
+// DataTables initialisation
+let table = new DataTable('#saleitmrep');
+
+// Refilter the table
+document.querySelectorAll('#min, #max').forEach((el) => {
+    el.addEventListener('change', () => table.draw());
+});
+</script>
+
+
+
+
 
   </body>
 </html>
