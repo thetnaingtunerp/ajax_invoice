@@ -3,7 +3,8 @@ from .views import *
 from . import views
 app_name = 'myapp'
 urlpatterns = [
-	path('', views.testfile, name='testfile'),
+	path('test/', views.testfile, name='testfile'),
+	path('', views.homepage, name='homepage'),
 	#sale
 	path('inv_list/', views.inv_list, name='inv_list'),
 	path('detail_inv/<int:id>/', views.detail_inv, name='detail_inv'),

@@ -12,6 +12,13 @@ def testfile(request):
 	return render(request, 'test.html')
 
 
+
+#Home Page Product View
+def homepage(request):
+    itm = item.objects.all()
+    context = {'itm':itm}
+    return render(request, 'homepage.html', context)
+
 # Setup Menu 
 def itemlist(request):
     itm = item.objects.all()
