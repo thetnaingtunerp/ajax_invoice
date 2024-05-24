@@ -21,4 +21,5 @@ urlpatterns = [
 
 	#reports
 	path('sale_item_report/', views.sale_item_report, name='sale_item_report'),
+	path('sale_amount_report/', views.sale_amount_report, name='sale_amount_report'),
 ]

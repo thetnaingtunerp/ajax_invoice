@@ -177,3 +177,8 @@ def sale_item_report(request):
     ivt = invitem.objects.all()
     context = {'ivt':ivt}
     return render(request, 'sale_item_report.html',context)
+
+def sale_amount_report(request):
+    inv = invoice.objects.all()
+    context = {'inv': inv}
+    return render(request, 'sale_amount_report.html', context)

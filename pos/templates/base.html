@@ -22,17 +22,17 @@
   </head>
   <body>
   	<nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <a class="navbar-brand" href="#">Company Name and Shop Name Header</a>
+  <a class="navbar-brand text-white" href="#">Company Name and Shop Name Header</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link text-white" href="{% url 'myapp:homepage' %}">ပင်မစာမျက်နှာ <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="{% url 'myapp:homepage' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}">အရောင်းစာမျက်နှာ</a>
+        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}">POS</a>
       </li>
       
       <li class="nav-item dropdown">
@@ -42,7 +42,17 @@
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'myapp:itemlist' %}">Create Item</a>
           <a class="dropdown-item" href="{% url 'myapp:sale_item_report' %}">Sale Item Report</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="{% url 'myapp:sale_amount_report' %}">Sale Amount Report</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Reports
+        </a>
+        <div class="dropdown-menu">
+          
+          <a class="dropdown-item" href="{% url 'myapp:sale_item_report' %}">Sale Item Report</a>
+          <a class="dropdown-item" href="{% url 'myapp:sale_amount_report' %}">Sale Amount Report</a>
         </div>
       </li>
     </ul>
@@ -210,6 +220,16 @@ $("#invTablebody").on('click', '.rmvItem', function() {
     //     }
     // }
 });
+
+//for sale amount report table
+new DataTable('#saleAmtRep', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
 
 new DataTable('#testdata', {
     layout: {

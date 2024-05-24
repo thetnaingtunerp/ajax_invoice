@@ -18,10 +18,11 @@
 <div class="row">
   <div class="col-md-6"><h3>Customer Name : {{data.customer}}</h3></div>
   <div class="col-md-6">
-    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#myModal">
      + Open Item List
   </button>
   </div>
+  
 </div>
 
 <table class="table table-striped">
@@ -96,12 +97,14 @@
           
 <div class="row">
 {% for i in itm %}
-<div class="col-md-3 mb-30">
+<div class="col-md-3 mb-30 mt-1">
 	<div class="card" style="width: 15rem;">
   <img class="card-img-top" src="{{i.photo.url}}" alt="cap" height="120px">
   <div class="card-body">
     <h5 class="card-title itmname">{{i.item_name}}</h5>
+    <span>{{i.slug|truncatewords:5}}</span>
     <span class="text-primary iprice">{{i.price}}</span>
+
     <span class="itmid" hidden>{{i.id}}</span>
 
     <p class="card-text">
@@ -116,15 +119,6 @@
 {% endfor %}
 </div> <!-- row end -->
 
-  
-
-
-
-
-
-
-
-
         </div>
         
         <!-- Modal footer -->
@@ -134,7 +128,12 @@
         
       </div>
     </div>
-  </div>
+  </div><!-- end modal -->
+
+
+
+
+
 
   </div>
 </div>
