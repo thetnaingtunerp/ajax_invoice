@@ -32,12 +32,15 @@
         <a class="nav-link text-white" href="{% url 'myapp:homepage' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}">POS</a>
+        <a class="nav-link text-white" href="{% url 'myapp:inv_list' %}"><strong>POS</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'myapp:itemlist' %}"><strong>Items List</strong></a>
       </li>
       
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-          Setup
+        <a class="nav-link dropdown-toggle text-blue bg-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          <strong>Purchase</strong>
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="{% url 'myapp:itemlist' %}">Create Item</a>
@@ -210,15 +213,11 @@ $("#invTablebody").on('click', '.rmvItem', function() {
 <script type="text/javascript">
   $(document).ready( function () {
     $('#itemlisttable').DataTable( {
-    paging: false,
-    scrollCollapse: true,
-    scrollY: '600px'
+    // paging: false,
+    // scrollCollapse: true,
+    // scrollY: '600px'
 
-    // layout: {
-    //     topStart: {
-    //         buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-    //     }
-    // }
+    
 });
 
 //for sale amount report table
@@ -240,6 +239,19 @@ new DataTable('#testdata', {
 });
 
 
+
+new DataTable('#saleitmrep', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
+
+
+
+
 } );
 
 
@@ -255,40 +267,40 @@ new DataTable('#testdata', {
 <!-- Sale Item Report -->
 <script>
 
-	let minDate, maxDate;
+// 	let minDate, maxDate;
 
-// Custom filtering function which will search data in column four between two values
-DataTable.ext.search.push(function (settings, data, dataIndex) {
-    let min = minDate.val();
-    let max = maxDate.val();
-    let date = new Date(data[5]);
+// // Custom filtering function which will search data in column four between two values
+// DataTable.ext.search.push(function (settings, data, dataIndex) {
+//     let min = minDate.val();
+//     let max = maxDate.val();
+//     let date = new Date(data[5]);
 
-    if (
-        (min === null && max === null) ||
-        (min === null && date <= max) ||
-        (min <= date && max === null) ||
-        (min <= date && date <= max)
-    ) {
-        return true;
-    }
-    return false;
-});
+//     if (
+//         (min === null && max === null) ||
+//         (min === null && date <= max) ||
+//         (min <= date && max === null) ||
+//         (min <= date && date <= max)
+//     ) {
+//         return true;
+//     }
+//     return false;
+// });
 
-// Create date inputs
-minDate = new DateTime('#min', {
-    format: 'MMMM Do YYYY'
-});
-maxDate = new DateTime('#max', {
-    format: 'MMMM Do YYYY'
-});
+// // Create date inputs
+// minDate = new DateTime('#min', {
+//     format: 'MMMM Do YYYY'
+// });
+// maxDate = new DateTime('#max', {
+//     format: 'MMMM Do YYYY'
+// });
 
-// DataTables initialisation
-let table = new DataTable('#saleitmrep');
-//
-// Refilter the table
-document.querySelectorAll('#min, #max').forEach((el) => {
-    el.addEventListener('change', () => table.draw());
-});
+// // DataTables initialisation
+// let table = new DataTable('#saleitmrep');
+// //
+// // Refilter the table
+// document.querySelectorAll('#min, #max').forEach((el) => {
+//     el.addEventListener('change', () => table.draw());
+// });
 </script>
 
 
