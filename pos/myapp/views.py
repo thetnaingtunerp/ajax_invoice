@@ -182,3 +182,39 @@ def sale_amount_report(request):
     inv = invoice.objects.all()
     context = {'inv': inv}
     return render(request, 'sale_amount_report.html', context)
+
+
+
+#Purchase Section
+##Supplier
+def supplier_info(request):
+    sup = supplierinfo.objects.all()
+    form = SupplierForm()
+    context = {'sup':sup, 'form':form}
+    return render(request, 'supplier_info.html', context)
+
+def suppliercreate(request):
+    if request.method == 'POST':
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('myapp:supplier_info')
+    else:
+        form = SupplierForm()
+    return redirect('myapp:supplier_info')
+
+def update_supplier(request):
+    if request.method == 'POST':
+        sid = request.POST.get('sid')
+        supplier = request.POST.get('supplier')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        note = request.POST.get('note')
+
+        ss = supplierinfo.objects.filter(id=sid).update(supplier=supplier,phone=phone,address=address, note=note)
+
+        return redirect('myapp:supplier_info')
+    else:
+        return redirect('myapp:supplier_info')
+
+

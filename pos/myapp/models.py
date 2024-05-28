@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 # Create your models here.
+
+# Sale
 class item(models.Model):
     photo = models.ImageField(upload_to='', blank=True, null=True)
     item_name = models.CharField(max_length=255)
@@ -41,4 +43,17 @@ class invitem(models.Model):
 
     def __str__(self):
         return self.item
+
+
+# Purchase
+class supplierinfo(models.Model):
+    supplier = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    note = models.TextField(blank=True, null=True)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.supplier
 

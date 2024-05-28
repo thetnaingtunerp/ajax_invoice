@@ -22,4 +22,9 @@ urlpatterns = [
 	#reports
 	path('sale_item_report/', views.sale_item_report, name='sale_item_report'),
 	path('sale_amount_report/', views.sale_amount_report, name='sale_amount_report'),
+
+	#Purchase
+	path('supplier_info/', views.supplier_info, name='supplier_info'),
+	path('suppliercreate/', views.suppliercreate, name='suppliercreate'),
+	path('update_supplier/', views.update_supplier, name='update_supplier'),
 ]

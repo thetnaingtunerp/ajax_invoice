@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="card border-info mb-3">
+  <div class="card-body">
+
+
+
+<!-- <h4>Supplier Infomation Table</h4> -->
+<div>
+    <a href="#" class="h4">Supplier Infomation Table</a>
+    
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newSuplierModal">
+                    <i class="fa-solid fa-user-plus"></i>
+                    </button>
+
+</div>
+
+<table id="supplierInfo" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>Supplier Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>More</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in sup %}
+            <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.supplier}}</td>
+                <td><strong>{{i.phone}}</strong></td>
+                <td>{{i.address}}</td>
+                <td>
+                    
+                
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#supNote-{{i.id}}">
+                    <i class="fa-solid fa-pencil"></i>
+                    </button>
+
+                    
+                    <a href="#" class="btn btn-success">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </a>
+
+
+  <!-- The Note Modal -->
+  <div class="modal fade" id="supNote-{{i.id}}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Notes</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form method="POST" action="/update_supplier/">{% csrf_token %}
+        <!-- Modal body -->
+        <div class="modal-body">
+            <input type="number" name="sid" value="{{i.id}}" hidden>
+            <input type="text" class="form-control" name="supplier" value="{{i.supplier}}">
+            <input type="text" class="form-control" name="phone" value="{{i.phone}}">
+            <input type="text" class="form-control" name="address" value="{{i.address}}">
+            <textarea class="form-control" name="note" rows="5">
+                {{i.note}}
+            </textarea>
+          
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-info">Update Supplier Info</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+                   
+                </td>
+                
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Sr.</th>
+                <th>Supplier Name</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>More</th>
+                
+                
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+</div>
+
+
+
+<!-- The Create Supplier Modal -->
+  <div class="modal fade" id="newSuplierModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Create Supplier</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" id="creatingSupplier">
+            <form method="POST" action="/suppliercreate/" enctype="multipart/form-data">
+        {% csrf_token %}
+          {{form}}
+
+          
+
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Create Supplier</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}
