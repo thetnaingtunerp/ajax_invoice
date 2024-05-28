@@ -218,3 +218,14 @@ def update_supplier(request):
         return redirect('myapp:supplier_info')
 
 
+def supplier_to_vouc(request):
+    supid = request.GET.get('supid')
+    supname = request.GET.get('supname')
+    p = purchasevoc(supplierid=supid, suppliername=supname)
+    p.save()
+    return JsonResponse({'status':'success'})
+
+def purchase_invoice_view(request):
+    purvoc = purchasevoc.objects.all()
+    context = {'purvoc':purvoc}
+    return render(request, 'purchase_invoice_view.html', context)

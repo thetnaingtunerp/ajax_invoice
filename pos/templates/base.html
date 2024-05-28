@@ -202,7 +202,34 @@ $("#invTablebody").on('click', '.rmvItem', function() {
 });//end delete item from invoice
 
 
+//start create purchase voucher
+$("#supplierTblBdy").on('click', '.supliPur', function() {
+    
+    var suptbltr = $(this).closest(".suptr");
+    var supid = suptbltr.find(".supid").html();
+    var supname = suptbltr.find(".supname").html();
+    // console.log(supid,supname);
+    $.ajax({
+        url: "/supplier_to_vouc/",
+        method: "GET",
+        data:{supid:supid, supname:supname},
+        success: function(data){
+        // console.log(data.status);
 
+        // alert('Item Add Successfully');
+        // window.setTimeout(function(){ } ,2000);
+        //                 location.reload();
+
+        window.location.href = '/purchase_invoice_view/';
+        // window.open('https://www.codexworld.com', '_blank');
+        },
+        error:function(){
+        alert('having some error contact to developer');
+        },
+
+    });//end ajax
+
+});//end create purchase voucher
 
 
 });

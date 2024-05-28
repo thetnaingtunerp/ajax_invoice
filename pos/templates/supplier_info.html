@@ -31,12 +31,12 @@
                 
             </tr>
         </thead>
-        <tbody>
+        <tbody id="supplierTblBdy">
             {% for i in sup %}
-            <tr>
-                <td>{{i.id}}</td>
-                <td>{{i.supplier}}</td>
-                <td><strong>{{i.phone}}</strong></td>
+            <tr class="suptr">
+                <td class="supid">{{i.id}}</td>
+                <td class="supname">{{i.supplier}}</td>
+                <td>{{i.phone}}</td>
                 <td>{{i.address}}</td>
                 <td>
                     
@@ -45,10 +45,10 @@
                     <i class="fa-solid fa-pencil"></i>
                     </button>
 
+                    <button type="button" class="btn btn-success supliPur"><i class="fa-solid fa-file-invoice"></i></button>
+
                     
-                    <a href="#" class="btn btn-success">
-                        <i class="fa-solid fa-file-invoice"></i>
-                    </a>
+                    
 
 
   <!-- The Note Modal -->

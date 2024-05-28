@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="card border-info mb-3">
+  <div class="card-body">
+
+
+
+<!-- <h4>Supplier Infomation Table</h4> -->
+<div>
+    <a href="#" class="h4">Purchase Table</a>
+    
+    
+
+</div>
+
+<table id="purVocView" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Sr.</th>
+                <th>Supplier Name</th>
+                <th>Total Amount</th>
+                <th>More</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody id="purVbody">
+            {% for i in purvoc %}
+            <tr class="suptr">
+                <td class="supid">{{i.id}}</td>
+                <td class="supname">{{i.suppliername}}</td>
+                <td>{{i.total}}</td>
+                <td>....</td>
+                
+                
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Sr.</th>
+                <th>Supplier Name</th>
+                <th>Total Amount</th>
+                <th>More</th>
+                
+                
+            </tr>
+        </tfoot>
+    </table>
+
+</div>
+</div>
+
+
+
+{% endblock content %}

@@ -27,4 +27,6 @@ urlpatterns = [
 	path('supplier_info/', views.supplier_info, name='supplier_info'),
 	path('suppliercreate/', views.suppliercreate, name='suppliercreate'),
 	path('update_supplier/', views.update_supplier, name='update_supplier'),
+	path('supplier_to_vouc/', views.supplier_to_vouc, name='supplier_to_vouc'),
+	path('purchase_invoice_view/', views.purchase_invoice_view, name='purchase_invoice_view'),
 ]
