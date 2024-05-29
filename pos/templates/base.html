@@ -43,9 +43,9 @@
           <strong>Purchase</strong>
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="{% url 'myapp:supplier_info' %}">Supplier Info</a>
-          <a class="dropdown-item" href="{% url 'myapp:sale_item_report' %}">Purchase Voucher</a>
-          <a class="dropdown-item" href="{% url 'myapp:sale_amount_report' %}">Purchase Report</a>
+          <a class="dropdown-item" href="{% url 'myapp:supplier_info' %}">Supplier</a>
+          <a class="dropdown-item" href="{% url 'myapp:purchase_invoice_view' %}">Invoice</a>
+          <a class="dropdown-item" href="{% url 'myapp:purchase_invoice_view' %}">Report</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -67,12 +67,12 @@
 <!-- Jumbotron -->
 
     <div class="jumbotron jumbotron-fluid">
-  <div class="container-fluid">
+  <!-- <div class="container-fluid"> -->
     
 {% block content %}
 {% endblock content %}
 
-  </div>
+  <!-- </div> -->
 </div>
 
 <!-- End Jumbotron -->
@@ -231,6 +231,41 @@ $("#supplierTblBdy").on('click', '.supliPur', function() {
 
 });//end create purchase voucher
 
+//start item to purchase voucher
+$("#purItmtbl").on('click', '.puritmsave', function() {
+    var purtbltr = $(this).closest(".purtbltr");
+    var iqty = purtbltr.find(".iqty").val(); 
+    var irate = purtbltr.find(".irate").val();
+    var itm = purtbltr.find(".iitmname").html();
+    var itmid = purtbltr.find(".itmid").html();
+    var pvoid = $("#pvoid").html();
+    // console.log(pvoid);
+    $.ajax({
+        url: "/save_itm_purvoc/",
+        method: "GET",
+        data:{pvoid:pvoid, itm:itm, itmid:itmid, iqty:iqty, irate:irate},
+        success: function(data){
+        // console.log(data.status);
+
+        // alert('Item Add Successfully');
+        window.setTimeout(function(){ } ,1000);
+                        location.reload();
+
+        // window.location.href = '/purchase_invoice_view/';
+        
+        },
+        error:function(){
+        alert('having some error contact to developer');
+        },
+
+    });//end ajax
+    
+
+});//end item to purchase voucher
+
+
+
+
 
 });
 
@@ -244,9 +279,7 @@ $("#supplierTblBdy").on('click', '.supliPur', function() {
     $('#itemlisttable').DataTable( {
     // paging: false,
     // scrollCollapse: true,
-    // scrollY: '600px'
-
-    
+    // scrollY: '600px'    
 });
 
 //for sale amount report table
@@ -278,14 +311,17 @@ new DataTable('#saleitmrep', {
 });
 
 
-// new DataTable('#supplierInfo', {
-//     layout: {
-//         topStart: {
-//             buttons: ['copy', 'excel', 'pdf', 'print']
-//         }
-//     }
-// });
+new DataTable('#purVocView', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
+
 $('#supplierInfo').DataTable();
+// $('#purItmtbl').DataTable();
 
 
 } );

@@ -66,7 +66,7 @@ class purchasevoc(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.suppliername
+        return f"{self.id}"
 
 class purchaseitems(models.Model):
     purvoc = models.ForeignKey(purchasevoc,on_delete=models.CASCADE)

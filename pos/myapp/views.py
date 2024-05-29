@@ -229,3 +229,36 @@ def purchase_invoice_view(request):
     purvoc = purchasevoc.objects.all()
     context = {'purvoc':purvoc}
     return render(request, 'purchase_invoice_view.html', context)
+
+def add_purchase_voc(request,id):
+    context={}
+    context["itm"] = item.objects.all()
+    context["pvo"] = purchasevoc.objects.get(id=id)
+    context["pitm"] = purchaseitems.objects.filter(purvoc=id)
+    return render(request, 'add_purchase_voc.html', context)
+
+def save_itm_purvoc(request):
+    pvoid = request.GET.get('pvoid')
+    itm = request.GET.get('itm')
+    iqty = request.GET.get('iqty')
+    irate = request.GET.get('irate')
+    itmid = request.GET.get('itmid')
+
+    purvoc = purchasevoc.objects.get(id=int(pvoid))
+    itemid = int(itmid)
+    qty = int(iqty)
+    rate = int(irate)
+    amt = qty * rate
+
+    pui = purchaseitems(purvoc=purvoc, item=itm, itemid=itemid, qty=qty, rate=rate, amount=amt)
+    pui.save()
+
+    purvoc.total +=amt
+    purvoc.save()
+
+    i_obj = item.objects.get(id=itemid)
+    i_obj.price = rate
+    i_obj.stock += qty
+    i_obj.save()
+
+    return JsonResponse({'status':'success'})

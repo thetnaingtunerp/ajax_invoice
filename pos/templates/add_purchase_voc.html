@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="card border-info">
+  <div class="card-body row">
+
+<div class="col-md-6">
+    <a href="#" class="h4">Item Table</a>
+    <table id="purItmtbl" class="table table-bordered" style="width:100%">
+    	<thead>
+    		<tr>
+    			<th>Photo</th>
+    			<th>Item Name</th>
+    			
+    			<th>Add</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		{% for i in itm %}
+    		<tr class="purtbltr">
+    			
+    			<td><img src="{{i.photo.url}}" width="80px"></td>
+    			<td class="iitmname">{{i.item_name}}</td>
+    			
+    			<td>
+    				<button type="button" class="btn btn-sm btn-primary"
+    				data-toggle="modal" data-target="#itmi-{{i.id}}">
+    				<i class="fa fa-cart-plus" aria-hidden="true"></i>
+    				</button>
+    				
+    
+  
+
+  <!-- The Modal -->
+  <div class="modal fade" id="itmi-{{i.id}}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+        	<span class="itmid" hidden>{{i.id}}</span>
+          <h4 class="modal-title">{{i.item_name}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        	<label>Enter Price</label>
+          <input type="number" class="form-control irate" name="irate" value="{{i.price}}">
+          <label>Enter Quantity</label>
+          <input type="number" class="form-control iqty" name="iqty" value="1">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-primary puritmsave">Save</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    			</td>
+    		</tr>
+    		{% endfor %}
+    	</tbody>
+    </table>
+</div>
+
+<div class="col-md-6">
+    <a href="#" class="h4">{{pvo.suppliername}}</a>
+    <span id="pvoid" hidden>{{pvo.id}}</span>
+    <table class="table table-bordered">
+    	<thead>
+    		<tr>
+    			<th>Item Name</th>
+    			<th>Qty</th>
+    			<th>Rate</th>
+    			<th>Amount</th>
+    			<th>
+    				
+    			</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		{% for i in pitm %}
+    		<tr>
+    			<td>{{i.item}}</td>
+    			<td>{{i.qty}}</td>
+    			<td>{{i.rate}}</td>
+    			<td class="text-right">{{i.amount}}</td>
+    			<td>
+    				<button type="button" class="btn btn-sm btn-danger">-</button>
+    			</td>
+    		</tr>
+    		{% endfor %}
+    		<tr>
+    			<td colspan="4" class="text-right">{{pvo.total}}</td>
+    		</tr>
+    	</tbody>
+    </table>
+</div>
+
+
+</div>
+</div>
+
+{% endblock content %}

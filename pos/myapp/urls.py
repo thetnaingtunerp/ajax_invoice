@@ -29,4 +29,6 @@ urlpatterns = [
 	path('update_supplier/', views.update_supplier, name='update_supplier'),
 	path('supplier_to_vouc/', views.supplier_to_vouc, name='supplier_to_vouc'),
 	path('purchase_invoice_view/', views.purchase_invoice_view, name='purchase_invoice_view'),
+	path('add_purchase_voc/<int:id>/', views.add_purchase_voc, name='add_purchase_voc'),
+	path('save_itm_purvoc/', views.save_itm_purvoc, name='save_itm_purvoc'),
 ]
