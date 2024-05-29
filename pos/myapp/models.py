@@ -20,6 +20,10 @@ class item(models.Model):
 class invoice_heading(models.Model):
     photo = models.ImageField(upload_to='', blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
+    desc1 = models.CharField(max_length=255, blank=True, null=True)
+    desc2 = models.CharField(max_length=255, blank=True, null=True)
+    desc3 = models.CharField(max_length=255, blank=True, null=True)
+    desc4 = models.CharField(max_length=255, blank=True, null=True)
 
 
 class invoice(models.Model):
