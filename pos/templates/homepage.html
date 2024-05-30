@@ -13,12 +13,16 @@
 	<div class="card">
   <img class="card-img-top" src="{{i.photo.url}}" alt="cap" height="120px">
   <div class="card-body">
-    <h5 class="card-title itmname">{{i.item_name}}(<span class="text-danger iprice">{{i.price}}</span>)</h5>
+    <h5 class="card-title itmname">{{i.item_name}}</h5>
     
     <span class="itmid" hidden>{{i.id}}</span>
+    <p class="card-text">
+      MMK: <span class="text-primary">{{i.price}}</span>
+      
+    </p>
 
     <p class="card-text">
-    	
+    	avaialble: <span class="text-primary">{{i.stock}}</span>
     	
     </p>
     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
